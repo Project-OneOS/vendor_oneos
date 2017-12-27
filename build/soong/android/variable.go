@@ -40,7 +40,7 @@ type Product_variables struct {
 		Overrides []string
 		Shared_libs  []string
         }
-  	Uses_qcom_bsp_legacy struct {
+	Uses_qcom_bsp_legacy struct {
 		Cppflags []string
 	}
 }

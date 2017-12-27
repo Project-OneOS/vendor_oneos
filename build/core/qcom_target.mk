@@ -26,6 +26,10 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
     BOARD_USES_QTI_HARDWARE := true
 endif
 
+ifneq ($(filter msm7x27a msm7x30 msm8660 msm8960,$(TARGET_BOARD_PLATFORM)),)
+     TARGET_USES_QCOM_BSP_LEGACY := true
+endif
+
 ifeq ($(BOARD_USES_QTI_HARDWARE),true)
 $(call set-device-specific-path,AUDIO,audio,hardware/qcom/audio/$(QCOM_HARDWARE_VARIANT))
 $(call set-device-specific-path,DISPLAY,display,hardware/qcom/display/$(QCOM_HARDWARE_VARIANT))
