@@ -22,4 +22,9 @@ PRODUCT_PACKAGES += \
     SafetyHubPrebuilt  \
     SettingsIntelligenceGooglePrebuilt
 
+# Telephony packages
+PRODUCT_PACKAGES += \
+    Stk \
+    CellBroadcastReceiver
+
 #include vendor/one/prebuilt/common/app/Android.mk
