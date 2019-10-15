@@ -1,5 +1,5 @@
 # Copyright (C) 2012 The CyanogenMod Project
-#           (C) 2017 The LineageOS Project
+#           (C) 2017-2020 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -178,6 +178,8 @@ KERNEL_MODULE_MOUNTPOINT := vendor
 endif
 MODULES_INTERMEDIATES := $(KERNEL_BUILD_OUT_PREFIX)$(call intermediates-dir-for,PACKAGING,kernel_modules)
 
+# Add host bin out dir to path
+PATH_OVERRIDE := PATH=$(KERNEL_BUILD_OUT_PREFIX)$(HOST_OUT_EXECUTABLES):$$PATH
 ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
     ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
         KERNEL_CLANG_VERSION := clang-$(TARGET_KERNEL_CLANG_VERSION)
@@ -261,8 +263,8 @@ $(KERNEL_CONFIG): $(KERNEL_DEFCONFIG_SRC) $(KERNEL_ADDITIONAL_CONFIG_OUT)
 			$(call make-kernel-target,KCONFIG_ALLCONFIG=$(KERNEL_OUT)/.config alldefconfig); \
 		fi
 
-$(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_CONFIG) $(DEPMOD)
-	@echo "Building Kernel"
+$(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_CONFIG) $(DEPMOD) $(DTC)
+	@echo "Building Kernel Image ($(BOARD_KERNEL_IMAGE_NAME))"
 	$(call make-kernel-target,$(BOARD_KERNEL_IMAGE_NAME))
 	$(hide) if grep -q '^CONFIG_OF=y' $(KERNEL_CONFIG); then \
 			echo "Building DTBs"; \
