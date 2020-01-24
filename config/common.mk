@@ -7,6 +7,11 @@ DISABLE_EAP_PROXY := true
 PRODUCT_PACKAGES += \
     bootanimation.zip
 
+# Offline charger
+PRODUCT_PACKAGES += \
+    charger_res_images \
+    product_charger_res_images
+
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
