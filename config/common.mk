@@ -45,6 +45,10 @@ else
 include vendor/one/sdclang/sdclang.mk
 endif
 
+# Build Miui-Style Brightness Slider
+PRODUCT_PACKAGES += \
+    BrightnessSliderOverlay
+
 include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
 include vendor/one/config/branding.mk
