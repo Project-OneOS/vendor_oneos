@@ -9,7 +9,9 @@ PRODUCT_PACKAGES += \
     ThemePicker \
     FMRadio \
     Updater \
-    OnePapers
+    OnePapers \
+    StitchImage \
+    NoCutoutOverlay
 
 # Build sound recorder
 PRODUCT_PACKAGES += Recorder

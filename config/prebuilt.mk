@@ -15,7 +15,7 @@ endif
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    vendor/one/prebuilt/common/etc/permissions/privapp-one-permission.xml:system/etc/permissions/privapp-one-permission.xml
+    vendor/one/prebuilt/common/etc/permissions/privapp-permissions-one.xml:system/etc/permissions/privapp-permissions-one.xml
 
 # Scripts
 PRODUCT_COPY_FILES += \
