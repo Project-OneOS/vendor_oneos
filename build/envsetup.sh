@@ -40,6 +40,17 @@ function breakfast()
             lunch one_$target-$variant
         fi
     fi
+
+    # PREBUILT RECOVERY RAMDISK CPIO
+    local TARGET_PREBUILT_RECOVERY_RAMDISK_CPIO=$(get_abs_build_var TARGET_PREBUILT_RECOVERY_RAMDISK_CPIO)
+    local TARGET_RECOVERY_ROOT_OUT=$(get_abs_build_var TARGET_RECOVERY_ROOT_OUT)
+    if [ ! -z "$TARGET_PREBUILT_RECOVERY_RAMDISK_CPIO" ]
+    then
+        if [ -d $TARGET_RECOVERY_ROOT_OUT ] 
+        then
+            rm -rf $TARGET_RECOVERY_ROOT_OUT
+        fi
+    fi
     return $?
 }
 
