@@ -44,8 +44,6 @@ endif
 # Perf Configs
 $(call inherit-product-if-exists, vendor/qcom/common/perf/perf-vendor.mk)
 
-include vendor/google-customization/config.mk
-
 include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
 include vendor/one/config/branding.mk
