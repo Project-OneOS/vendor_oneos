@@ -27,6 +27,7 @@ type Product_variables struct {
 	Uses_qti_camera_device struct {
 		Cppflags []string
 		Shared_libs []string
+		Export_shared_lib_headers []string
 	}
 	Needs_text_relocations struct {
 		Cppflags []string
