@@ -7,13 +7,6 @@ DISABLE_EAP_PROXY := true
 PRODUCT_PACKAGES += \
     bootanimation.zip
 
-# Custom off-mode charger
-PRODUCT_PACKAGES += \
-    charger_res_images \
-    one_charger_res_images \
-    font_log.png \
-    libhealthd.one
-
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
