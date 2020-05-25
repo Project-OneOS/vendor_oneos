@@ -43,6 +43,10 @@ type Product_variables struct {
 	Uses_qcom_bsp_legacy struct {
 		Cppflags []string
 	}
+	Target_surfaceflinger_fod_lib struct {
+		Cflags []string
+		Whole_static_libs []string
+	}
 }
 
 type ProductVariables struct {
@@ -60,4 +64,5 @@ type ProductVariables struct {
 	Has_legacy_camera_hal1  *bool `json:",omitempty"`
 	Target_init_vendor_lib  *string `json:",omitempty"`
 	Uses_qcom_bsp_legacy  *bool `json:",omitempty"`
+	Target_surfaceflinger_fod_lib  *string `json:",omitempty"`
 }
