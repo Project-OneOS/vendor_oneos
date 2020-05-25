@@ -11,6 +11,7 @@ PRODUCT_PACKAGES += \
     Updater \
     OnePapers \
     StitchImage \
+    MediaProvider \
     NoCutoutOverlay
 
 # Build sound recorder

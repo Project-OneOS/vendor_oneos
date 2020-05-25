@@ -1,5 +1,9 @@
 DEVICE_PACKAGE_OVERLAYS += vendor/one/overlay/common
 
+# Ignore overlays on RRO builds
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
+    vendor/one/overlay/common/packages/apps/Messaging
+
 # Disable qmi EAP-SIM security
 DISABLE_EAP_PROXY := true
 
@@ -47,10 +51,14 @@ endif
 PRODUCT_PACKAGES += \
     BrightnessSliderOverlay
 
+# GApps
+ifeq ($(WITH_GAPPS),true)
+include vendor/pixelgapps/pixel-gapps.mk
+endif
+
 include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
 include vendor/one/config/branding.mk
 include vendor/one/config/prop.mk
 include vendor/one/config/gapps.mk
-include packages/overlays/Themes/themes.mk
 
