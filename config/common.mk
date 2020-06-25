@@ -53,7 +53,8 @@ PRODUCT_PACKAGES += \
 
 # GApps
 ifeq ($(WITH_GAPPS),true)
-include vendor/pixelgapps/pixel-gapps.mk
+include vendor/gapps/config.mk
+IS_PHONE := true
 endif
 
 include vendor/one/config/prebuilt.mk
