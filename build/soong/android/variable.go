@@ -50,6 +50,9 @@ type Product_variables struct {
 		Cflags []string
 		Whole_static_libs []string
 	}
+	Target_uses_prebuilt_dynamic_partitions struct {
+		Cflags []string
+	}
 }
 
 type ProductVariables struct {
@@ -69,4 +72,5 @@ type ProductVariables struct {
 	Target_init_vendor_lib  *string `json:",omitempty"`
 	Uses_qcom_bsp_legacy  *bool `json:",omitempty"`
 	Target_surfaceflinger_fod_lib  *string `json:",omitempty"`
+	Target_uses_prebuilt_dynamic_partitions  *bool `json:",omitempty"`
 }
