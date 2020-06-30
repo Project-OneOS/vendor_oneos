@@ -27,4 +27,7 @@ PRODUCT_PACKAGES += \
     Stk \
     CellBroadcastReceiver
 
-#include vendor/one/prebuilt/common/app/Android.mk
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Aurora \
+    Settings \
+    SystemUI
