@@ -31,7 +31,11 @@ LOCAL_REQUIRED_MODULES := \
     AccentColorTorchRedOverlay \
     FontGoogleSansOverlay \
     FontSlateForOnePlusOverlay \
-    IconShapePebbleOverlay
+    IconShapePebbleOverlay \
+    NavigationBarModeGesturalOverlayNoPill \
+    NavigationBarModeGesturalOverlayNoPillNarrowBack \
+    NavigationBarModeGesturalOverlayNoPillWideBack \
+    NavigationBarModeGesturalOverlayNoPillExtraWideBack
 
 include $(BUILD_PHONY_PACKAGE)
 include $(call first-makefiles-under,$(LOCAL_PATH))
