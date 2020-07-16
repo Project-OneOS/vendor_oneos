@@ -24,6 +24,9 @@
     <!-- Volte Icon -->
     <bool name="config_display_volte">true</bool>
 
+    <!-- VoWiFi Icon -->
+    <bool name="config_display_vowifi">true</bool>
+
     <!-- Re-enable keyguard shortcuts -->
     <bool name="config_keyguardShowCameraAffordance">true</bool>
     <bool name="config_keyguardShowLeftAffordance">true</bool>

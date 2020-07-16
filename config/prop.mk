@@ -4,6 +4,8 @@ else
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
 endif
 
+PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=log
+
 # SetupWizard
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     setupwizard.enable_assist_gesture_training=true \
@@ -11,16 +13,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     setupwizard.feature.show_pixel_tos=true \
     setupwizard.feature.show_support_link_in_deferred_setup=false \
     setupwizard.theme=glif_v3_light
-	
-# Gestures
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
 
 # Sounds
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.config.ringtone=The_big_adventure.ogg \
-    ro.config.notification_sound=Popcorn.ogg \
-    ro.config.alarm_alert=Bright_morning.ogg
+    ro.config.ringtone=All_That.ogg
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.debug.alloc=0 \

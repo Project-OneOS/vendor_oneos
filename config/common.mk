@@ -54,8 +54,13 @@ PRODUCT_PACKAGES += \
 # GApps
 ifeq ($(WITH_GAPPS),true)
 include vendor/gapps/config.mk
+PRODUCT_PACKAGES += \
+    ModuleMetadataGooglePrebuilt
 IS_PHONE := true
 endif
+
+# Perf Configs
+$(call inherit-product-if-exists, vendor/qcom/common/perf/perf-vendor.mk)
 
 include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
