@@ -7,10 +7,6 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 # Disable qmi EAP-SIM security
 DISABLE_EAP_PROXY := true
 
-# Bootanimation
-PRODUCT_PACKAGES += \
-    bootanimation.zip
-
 # Offline charger
 PRODUCT_PACKAGES += \
     charger_res_images \
@@ -22,18 +18,6 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0 \
     android.hidl.base@1.0.vendor \
     android.hidl.manager@1.0.vendor
-
-# Face Unlock
-TARGET_FACE_UNLOCK_SUPPORTED := false
-ifeq ($(TARGET_GAPPS_ARCH),arm64)
-ifneq ($(TARGET_DISABLE_ALTERNATIVE_FACE_UNLOCK), true)
-PRODUCT_PACKAGES += \
-    FaceUnlockService
-TARGET_FACE_UNLOCK_SUPPORTED := true
-endif
-endif
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.face.moto_unlock_service=$(TARGET_FACE_UNLOCK_SUPPORTED)
 
 ifneq ($(HOST_OS),linux)
 ifneq ($(sdclang_already_warned),true)
@@ -53,10 +37,7 @@ PRODUCT_PACKAGES += \
 
 # GApps
 ifeq ($(WITH_GAPPS),true)
-include vendor/gapps/config.mk
-PRODUCT_PACKAGES += \
-    ModuleMetadataGooglePrebuilt
-IS_PHONE := true
+include vendor/partner_gms/products/gms.mk
 endif
 
 # Perf Configs
