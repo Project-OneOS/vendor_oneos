@@ -27,7 +27,8 @@ PRODUCT_PACKAGES += \
 
 # FONTS
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/prebuilt/common/fonts,$(TARGET_COPY_OUT_SYSTEM)/fonts)
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/prebuilt/common/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
+    $(LOCAL_PATH)/prebuilt/common/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
 
 # Media
 PRODUCT_COPY_FILES += \

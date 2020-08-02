@@ -6,6 +6,14 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=log
 
+ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=android-google
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+endif
+
 # Sounds
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.config.ringtone=All_That.ogg

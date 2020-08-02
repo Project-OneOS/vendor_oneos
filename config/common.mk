@@ -38,6 +38,7 @@ PRODUCT_PACKAGES += \
 # GApps
 ifeq ($(WITH_GAPPS),true)
 include vendor/partner_gms/products/gms.mk
+include vendor/partner_gms/products/turbo.mk
 endif
 
 # Perf Configs
