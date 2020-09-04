@@ -15,8 +15,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 # Sounds
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.config.ringtone=All_That.ogg
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.config.ringtone=Beyond_The_Line.ogg \
+    ro.config.notification_sound=Tethys.ogg \
+    ro.config.alarm_alert=Argon.ogg
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.debug.alloc=0 \
