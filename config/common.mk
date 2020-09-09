@@ -39,6 +39,7 @@ PRODUCT_PACKAGES += \
 ifeq ($(WITH_GAPPS),true)
 include vendor/partner_gms/products/gms.mk
 include vendor/partner_gms/products/turbo.mk
+include vendor/google-customization/config.mk
 endif
 
 # Perf Configs
