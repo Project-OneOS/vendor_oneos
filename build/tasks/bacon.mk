@@ -19,9 +19,11 @@
 
 TARGET_ROM_PACKAGE := $(PRODUCT_OUT)/OneOS-$(ONE_VERSION).zip
 
+MD5 := prebuilts/build-tools/path/$(HOST_OS)-x86/md5sum
+
 .PHONY: bacon
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) mv $(INTERNAL_OTA_PACKAGE_TARGET) $(TARGET_ROM_PACKAGE)
-	$(hide) $(MD5SUM) $(TARGET_ROM_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(TARGET_ROM_PACKAGE).md5sum
+	$(hide) $(MD5) $(TARGET_ROM_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(TARGET_ROM_PACKAGE).md5sum
 	@echo "Package Complete: $(TARGET_ROM_PACKAGE)" >&2
 	$(hide) bash vendor/one/tools/json.sh
