@@ -1,5 +1,5 @@
 # Copyright (C) 2017 Unlegacy-Android
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017, 2020 The LineageOS Project
 # Copyright (C) 2019 OneOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@
 
 TARGET_ROM_PACKAGE := $(PRODUCT_OUT)/OneOS-$(ONE_VERSION).zip
 
-MD5 := prebuilts/build-tools/path/$(HOST_OS)-x86/md5sum
+MD5 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/md5sum
 
 .PHONY: bacon
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
