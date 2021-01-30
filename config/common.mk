@@ -7,6 +7,9 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 # Disable qmi EAP-SIM security
 DISABLE_EAP_PROXY := true
 
+# Enable Debug art
+PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := true
+
 # Offline charger
 PRODUCT_PACKAGES += \
     charger_res_images \
