@@ -92,9 +92,8 @@ else
 endif
 
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/qcom/$(QCOM_HARDWARE_VARIANT)/audio \
-    hardware/qcom/$(QCOM_HARDWARE_VARIANT)/display \
-    hardware/qcom/$(QCOM_HARDWARE_VARIANT)/media
+    hardware/qcom/display \
+    hardware/qcom/media
 
 # QCOM HW crypto
 ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)

@@ -15,20 +15,16 @@ endif
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    vendor/one/prebuilt/common/etc/permissions/privapp-permissions-one.xml:system/etc/permissions/privapp-permissions-one.xml
+    vendor/one/prebuilt/common/etc/permissions/privapp-permissions-one.xml:system/etc/permissions/privapp-permissions-one.xml \
+    vendor/one/config/permissions/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
 
 # Scripts
 PRODUCT_COPY_FILES += \
     vendor/one/prebuilt/common/etc/init/one_updates.rc:system/etc/init/one_updates.rc
 
-# APNS
-PRODUCT_PACKAGES += \
-    apns-conf.xml
-
 # FONTS
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/prebuilt/common/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
-    $(LOCAL_PATH)/prebuilt/common/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/prebuilt/common/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts)
 
 # Media
 PRODUCT_COPY_FILES += \

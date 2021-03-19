@@ -1,46 +1,88 @@
-bootstrap_go_package {
-    name: "soong-one",
-    pkgPath: "one/soong/android",
-    srcs: [
-        "android/variable.go",
+soong_config_module_type {
+    name: "surfaceflinger_fod_lib",
+    module_type: "cc_defaults",
+    config_namespace: "oneGlobalVars",
+    value_variables: ["target_surfaceflinger_fod_lib"],
+    properties: [
+        "cppflags",
+        "whole_static_libs",
     ],
 }
 
-bootstrap_go_package {
-    name: "soong-one-generator",
-    pkgPath: "one/soong/generator",
-    deps: [
-        "blueprint",
-        "blueprint-pathtools",
-        "soong",
-        "soong-android",
-        "soong-shared",
-    ],
-    srcs: [
-        "generator/generator.go",
-        "generator/variables.go",
-    ],
-    pluginFor: ["soong_build"],
+surfaceflinger_fod_lib {
+    name: "surfaceflinger_fod_lib_defaults",
+    soong_config_variables: {
+        target_surfaceflinger_fod_lib: {
+            cppflags: ["-DTARGET_PROVIDES_FOD_LIB"],
+            whole_static_libs: ["%s"],
+        },
+    },
 }
 
-one_generator {
-    name: "generated_kernel_includes",
-
-    // The headers make command
-    cmd: "$(PATH_OVERRIDE_SOONG) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(TARGET_KERNEL_SOURCE) O=$(KERNEL_BUILD_OUT_PREFIX)$(genDir) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) headers_install",
-
-    // Directories that can be imported by a cc_* module generated_headers property
-    export_include_dirs: ["usr/include", "usr/techpack/audio/include"],
-
-    // Sources for dependency tracking
-    dep_root: "$(TARGET_KERNEL_SOURCE)",
-    dep_files: [ "Makefile", "include/**/*", "arch/$(KERNEL_ARCH)/include/**/*", "techpack/audio/include/**/*"],
+soong_config_module_type {
+    name: "vendor_init",
+    module_type: "cc_defaults",
+    config_namespace: "oneGlobalVars",
+    value_variables: ["target_init_vendor_lib"],
+    properties: ["whole_static_libs"],
 }
 
-cc_library_headers {
-    name: "generated_kernel_headers",
-    generated_headers: ["generated_kernel_includes"],
-    export_generated_headers: ["generated_kernel_includes"],
-    vendor_available: true,
-    recovery_available: true,
+vendor_init {
+    name: "vendor_init_defaults",
+    soong_config_variables: {
+        target_init_vendor_lib: {
+            whole_static_libs: ["%s"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "gralloc_10_usage_bits",
+    module_type: "cc_defaults",
+    config_namespace: "oneGlobalVars",
+    value_variables: ["additional_gralloc_10_usage_bits"],
+    properties: ["cppflags"],
+}
+
+gralloc_10_usage_bits {
+    name: "gralloc_10_usage_bits_defaults",
+    soong_config_variables: {
+        additional_gralloc_10_usage_bits: {
+            cppflags: ["-DADDNL_GRALLOC_10_USAGE_BITS=%s"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "no_mask_layer",
+    module_type: "cc_defaults",
+    config_namespace: "oneGlobalVars",
+    bool_variables: ["no_mask_layer"],
+    properties: ["cppflags"],
+}
+
+no_mask_layer {
+    name: "no_mask_layer_defaults",
+    soong_config_variables: {
+        no_mask_layer: {
+            cppflags: ["-DTARGET_DISPLAY_HAS_NO_MASK_LAYER"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "target_camera_needs_client_info",
+    module_type: "cc_defaults",
+    config_namespace: "oneGlobalVars",
+    bool_variables: ["target_camera_needs_client_info"],
+    properties: ["cppflags"],
+}
+
+target_camera_needs_client_info {
+    name: "target_camera_needs_client_info_defaults",
+    soong_config_variables: {
+        target_camera_needs_client_info: {
+            cppflags: ["-DTARGET_NEEDS_CLIENT_INFO"],
+        },
+    },
 }

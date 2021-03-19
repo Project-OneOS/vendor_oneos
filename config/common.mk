@@ -13,7 +13,8 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := true
 # Offline charger
 PRODUCT_PACKAGES += \
     charger_res_images \
-    product_charger_res_images
+    product_charger_res_images \
+    libc++.vendor
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -34,15 +35,11 @@ else
 include vendor/one/sdclang/sdclang.mk
 endif
 
-# Build Miui-Style Brightness Slider
-PRODUCT_PACKAGES += \
-    BrightnessSliderOverlay
-
 # GApps
 ifeq ($(WITH_GAPPS),true)
-include vendor/partner_gms/products/gms.mk
-include vendor/partner_gms/products/turbo.mk
-include vendor/google-customization/config.mk
+   include vendor/partner_gms/products/gms.mk
+   include vendor/partner_gms/products/turbo.mk
+   include vendor/partner_modules/build/mainline_modules.mk
 endif
 
 # Perf Configs
@@ -52,5 +49,4 @@ include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
 include vendor/one/config/branding.mk
 include vendor/one/config/prop.mk
-include vendor/one/config/gapps.mk
-
+include vendor/one/config/telephony.mk

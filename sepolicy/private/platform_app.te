@@ -1,0 +1,6 @@
+# Allow platform applications to find the NFC service.
+allow platform_app nfc_service:service_manager find;
+
+allow platform_app vendor_sysfs_dc_dim:file rw_file_perms;
+# Allow FOD HAL service to be found
+hal_client_domain(platform_app, hal_one_fod)

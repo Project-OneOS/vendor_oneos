@@ -1,26 +1,13 @@
 # Build OneOS apps
 PRODUCT_PACKAGES += \
     Aurora \
-    OneBrowser \
     ThemePicker \
     FMRadio \
     Updater \
     OnePapers \
+    YadaYada \
     StitchImage \
-    MediaProvider
-
-# Build sound recorder
-PRODUCT_PACKAGES += Recorder
-
-# Override AOSP/CAF PACKAGES
-PRODUCT_PACKAGES += \
-    SafetyHubPrebuilt  \
-    SettingsIntelligenceGooglePrebuilt
-
-# Telephony packages
-PRODUCT_PACKAGES += \
-    Stk \
-    CellBroadcastReceiver
+    QuickAccessWallet
 
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Aurora \
@@ -37,16 +24,13 @@ PRODUCT_PACKAGES += \
     product_charger_res_images
 
 # Face Unlock
-TARGET_FACE_UNLOCK_SUPPORTED := false
-ifeq ($(TARGET_GAPPS_ARCH),arm64)
-ifneq ($(TARGET_DISABLE_ALTERNATIVE_FACE_UNLOCK), true)
 PRODUCT_PACKAGES += \
     FaceUnlockService
 TARGET_FACE_UNLOCK_SUPPORTED := true
-endif
-endif
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.face.moto_unlock_service=$(TARGET_FACE_UNLOCK_SUPPORTED)
+    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 
 # Offline charger
 PRODUCT_PACKAGES += \
@@ -60,7 +44,10 @@ PRODUCT_PACKAGES += \
     android.hidl.base@1.0.vendor \
     android.hidl.manager@1.0.vendor
 
-# Font
+# Custom Overlays
 PRODUCT_PACKAGES += \
-    FontGoogleSansOverlay \
-    FontSlateForOnePlusOverlay \
+    ONEImmersiveNavigationOverlay \
+
+$(call inherit-product-if-exists, external/google-fonts/lato/fonts.mk)
+$(call inherit-product-if-exists, external/google-fonts/rubik/fonts.mk)
+
