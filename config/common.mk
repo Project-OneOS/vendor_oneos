@@ -42,9 +42,6 @@ ifeq ($(WITH_GAPPS),true)
    include vendor/partner_modules/build/mainline_modules.mk
 endif
 
-# Perf Configs
-$(call inherit-product-if-exists, vendor/qcom/common/perf/perf-vendor.mk)
-
 include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
 include vendor/one/config/branding.mk

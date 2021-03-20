@@ -1,6 +1,6 @@
 # Build OneOS apps
 PRODUCT_PACKAGES += \
-    Aurora \
+    AuroraQuickStep \
     ThemePicker \
     FMRadio \
     Updater \
@@ -10,7 +10,7 @@ PRODUCT_PACKAGES += \
     QuickAccessWallet
 
 PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Aurora \
+    AuroraQuickStep \
     Settings \
     SystemUI
 
