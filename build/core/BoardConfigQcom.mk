@@ -78,6 +78,7 @@ else ifneq ($(filter $(UM_3_18_FAMILY),$(TARGET_BOARD_PLATFORM)),)
 else ifneq ($(filter $(UM_4_4_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     MSM_VIDC_TARGET_LIST := $(UM_4_4_FAMILY)
     QCOM_HARDWARE_VARIANT := msm8998
+    PRODUCT_SOONG_NAMESPACES += vendor/qcom/opensource/commonsys-intf/display
 else ifneq ($(filter $(UM_4_9_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     MSM_VIDC_TARGET_LIST := $(UM_4_9_FAMILY)
     QCOM_HARDWARE_VARIANT := sdm845
@@ -91,12 +92,13 @@ else
     QCOM_HARDWARE_VARIANT := $(TARGET_BOARD_PLATFORM)
 endif
 
-PRODUCT_SOONG_NAMESPACES += \
-    hardware/qcom/display \
-    hardware/qcom/media
-
 # QCOM HW crypto
 ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
     TARGET_CRYPTFS_HW_PATH ?= vendor/qcom/opensource/cryptfs_hw
 endif
 
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/qcom/$(QCOM_HARDWARE_VARIANT)
+
+SRC_MEDIA_HAL_DIR := hardware/qcom/$(QCOM_HARDWARE_VARIANT)/media
+SRC_DISPLAY_HAL_DIR := hardware/qcom/$(QCOM_HARDWARE_VARIANT)/display
