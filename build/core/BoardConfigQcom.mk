@@ -85,8 +85,8 @@ else ifneq ($(filter $(UM_4_9_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     PRODUCT_SOONG_NAMESPACES += vendor/qcom/opensource/commonsys-intf/display
 else ifneq ($(filter $(UM_4_14_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     MSM_VIDC_TARGET_LIST := $(UM_4_14_FAMILY)
-    PRODUCT_SOONG_NAMESPACES += vendor/qcom/opensource/commonsys-intf/display
     QCOM_HARDWARE_VARIANT := sm8150
+    PRODUCT_SOONG_NAMESPACES += vendor/qcom/opensource/commonsys-intf/display
 else
     MSM_VIDC_TARGET_LIST := $(TARGET_BOARD_PLATFORM)
     QCOM_HARDWARE_VARIANT := $(TARGET_BOARD_PLATFORM)
@@ -98,7 +98,9 @@ ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
 endif
 
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/qcom/$(QCOM_HARDWARE_VARIANT)
+    hardware/qcom/audio \
+    hardware/qcom/display \
+    hardware/qcom/media
 
-SRC_MEDIA_HAL_DIR := hardware/qcom/$(QCOM_HARDWARE_VARIANT)/media
-SRC_DISPLAY_HAL_DIR := hardware/qcom/$(QCOM_HARDWARE_VARIANT)/display
+QCOM_MEDIA_ROOT := hardware/qcom/media
+

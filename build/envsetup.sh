@@ -20,6 +20,66 @@ function brunch()
     return $?
 }
 
+function link_hals() {
+    local TARGET_QCOM_VARIANT=$(get_build_var QCOM_HARDWARE_VARIANT)
+    local TARGET_BOARD_PLATFORM=$(get_build_var TARGET_BOARD_PLATFORM)
+    local DISPLAY_PATH=$(gettop)/hardware/qcom/${TARGET_QCOM_VARIANT}/display
+    local MEDIA_PATH=$(gettop)/hardware/qcom/${TARGET_QCOM_VARIANT}/media
+    local AUDIO_PATH=$(gettop)/vendor/qcom/opensource/audio-hal/primary-hal/${TARGET_QCOM_VARIANT}
+    [ ! -d ${AUDIO_PATH} ] && {
+        AUDIO_PATH=$(gettop)/hardware/qcom/${TARGET_QCOM_VARIANT}/audio
+    }
+    local HAL_LIST="${DISPLAY_PATH} ${MEDIA_PATH} ${AUDIO_PATH}"
+    local BOARD_PATH=$(gettop)/vendor/qcom/defs/board-defs/vendor
+    local PRODUCT_PATH=$(gettop)/vendor/qcom/defs/product-defs/vendor
+    [ ! -d ${BOARD_PATH} ] && mkdir -p ${BOARD_PATH}
+    [ ! -d ${PRODUCT_PATH} ] && mkdir -p ${PRODUCT_PATH}
+    cd ${PRODUCT_PATH} && rm -f $(echo " $(get_build_var QCOM_BOARD_PLATFORMS)" | tr -s [:space:] ' ' | sed "s: :.mk :g" | sed "s: : *:g")
+    cd $(gettop)
+    for HAL in ${HAL_LIST}; do
+        [ -d ${HAL} ] && {
+            local HAL_NAME=$(basename ${HAL})
+            [ "${HAL_NAME}" == "${TARGET_QCOM_VARIANT}" ] && {
+                HAL_NAME="audio"
+            }
+            local REAL_LINK=$(gettop)/hardware/qcom/${HAL_NAME}
+            [ ! -f ${REAL_LINK}/.${TARGET_QCOM_VARIANT} ] && rm -rf ${REAL_LINK}
+            [ ! -d ${REAL_LINK} ] || \
+               (cd ${HAL} && \
+               ([ $(git rev-parse HEAD) != $(git rev-parse m/eleven-caf) ] || \
+               git status | grep -q "Untracked files" || \
+               git status | grep -q "Changes to be committed" || \
+               git status | grep -q "Changes not staged for commit")) && {
+                croot
+                rm -rf $(gettop)/hardware/qcom/${HAL_NAME}
+                cp -r ${HAL} ${REAL_LINK}
+                touch ${REAL_LINK}/.${TARGET_QCOM_VARIANT}
+                find ${REAL_LINK} -type f -exec sed -i "s:vendor/qcom/opensource/audio-hal/primary-hal:hardware/qcom/audio:g" {} \;
+                find ${REAL_LINK} -type f -exec sed -i "s:\$(QCOM_MEDIA_ROOT):hardware/qcom/media:g" {} \;
+#                rm -rf ${REAL_LINK}/.git
+#                ln -f ${HAL}/.git ${REAL_LINK}/.git
+            }
+            rm -rf ${BOARD_PATH}/*${HAL_NAME}*mk ${PRODUCT_PATH}/*${HAL_NAME}*mk 2&>/dev/null
+            PRODUCT_MK=$(find ${REAL_LINK}/ -type f -name "*product*.mk")
+            BOARD_MK=$(find ${REAL_LINK}/ -type f -name "*board*.mk")
+            TARGET_MK=$(find ${REAL_LINK}/ -type f -name "${TARGET_BOARD_PLATFORM}.mk")
+            [ -f ${PRODUCT_MK} ] && {
+                ln -f ${PRODUCT_MK} ${PRODUCT_PATH}/${HAL_NAME}-product.mk
+            }
+            [ -f ${BOARD_MK} ] && {
+                ln -f ${BOARD_MK} ${BOARD_PATH}/${HAL_NAME}-board.mk
+            }
+            [ -f ${TARGET_MK} ] && {
+                ln -f ${TARGET_MK} ${PRODUCT_PATH}/${HAL_NAME}-${TARGET_BOARD_PLATFORM}.mk
+            }
+        }
+    done
+    [ -d $(gettop)/device/qcom/kernelscripts ] && {
+        rm -rf $(gettop)/vendor/one/build/tasks/kernel_definitions.mk
+        ln -f $(gettop)/device/qcom/kernelscripts/kernel_definitions.mk vendor/one/build/tasks/kernel_definitions.mk
+    }
+}
+
 function breakfast()
 {
     target=$1
@@ -46,7 +106,7 @@ function breakfast()
     local TARGET_RECOVERY_ROOT_OUT=$(get_abs_build_var TARGET_RECOVERY_ROOT_OUT)
     if [ ! -z "$TARGET_PREBUILT_RECOVERY_RAMDISK_CPIO" ]
     then
-        if [ -d $TARGET_RECOVERY_ROOT_OUT ] 
+        if [ -d $TARGET_RECOVERY_ROOT_OUT ]
         then
             rm -rf $TARGET_RECOVERY_ROOT_OUT
         fi
