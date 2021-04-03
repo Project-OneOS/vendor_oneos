@@ -16,6 +16,21 @@ PRODUCT_PACKAGES += \
     product_charger_res_images \
     libc++.vendor
 
+# Vendor libgui
+PRODUCT_PACKAGES += \
+    libgui_vendor
+
+# Vendor libstdc++
+PRODUCT_PACKAGES += \
+    libstdc++.vendor
+
+#VNDK
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhidltransport.vendor \
+    libhwbinder \
+    libhwbinder.vendor
+
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
@@ -34,6 +49,34 @@ else
 # include definitions for SDCLANG
 include vendor/one/sdclang/sdclang.mk
 endif
+
+ifeq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=1
+else
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=log
+
+ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=android-google
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+endif
+
+# Sounds
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.config.ringtone=Beyond_The_Line.ogg \
+    ro.config.notification_sound=Tethys.ogg \
+    ro.config.alarm_alert=Argon.ogg
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.debug.alloc=0 \
+    ro.com.android.dataroaming=false \
+    ro.com.android.dateformat=MM-dd-yyyy \
+    persist.sys.disable_rescue=true
 
 # GApps
 ifeq ($(WITH_GAPPS),true)
