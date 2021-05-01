@@ -23,3 +23,4 @@ KERNEL_SD_LLVM_SUPPORT ?= true
 ifneq ($(strip $(BOARD_KERNEL_SEPARATED_DTBO)),)
 BOARD_PREBUILT_DTBOIMAGE := $(PRODUCT_OUT)/prebuilt_dtbo.img
 endif
+KERNEL_MODULES_OUT ?= $(PRODUCT_OUT)/system/lib/modules
