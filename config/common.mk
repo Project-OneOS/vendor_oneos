@@ -85,6 +85,7 @@ ifeq ($(WITH_GAPPS),true)
    include vendor/partner_modules/build/mainline_modules.mk
 endif
 
+-include device/qcom/common/Android.mk
 include vendor/one/config/prebuilt.mk
 include vendor/one/config/packages.mk
 include vendor/one/config/branding.mk
